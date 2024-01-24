@@ -1,0 +1,19 @@
+//Verilog-AMS HDL for "ADC", "comparator" "verilogams"
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module comparator(Vin, Vref, Dout);
+    ddiscrete Dout;
+    input Vin;
+    input Vref;
+    output Dout;
+    reg    Dout;
+
+    electrical Vin;
+    electrical Vref;
+
+    always begin @(cross(V(Vin) - V(Vref), +1)) Dout = 1; end
+    always begin @(cross(V(Vin) - V(Vref), -1)) Dout = 0; end
+
+endmodule
